@@ -1,4 +1,4 @@
-﻿namespace fp_web_aula_1.Controllers
+﻿namespace fp_web_aula_1_core.Models
 {
     public class Noticia
     {

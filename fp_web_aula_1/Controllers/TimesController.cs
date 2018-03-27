@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using fp_web_aula_1.Models;
+using fp_web_aula_1_core.Models;
 
 namespace fp_web_aula_1.Controllers
 {

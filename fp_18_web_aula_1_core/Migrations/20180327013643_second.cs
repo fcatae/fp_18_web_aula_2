@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace fp_web_aula_1.Migrations
+namespace fp_web_aula_1_core.Migrations
 {
     public partial class second : Migration
     {

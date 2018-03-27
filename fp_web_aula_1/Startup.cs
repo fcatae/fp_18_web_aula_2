@@ -1,5 +1,6 @@
 ﻿using fp_web_aula_1.Controllers;
-using fp_web_aula_1.Models;
+using fp_web_aula_1_core.Models;
+using fp_web_aula_1_core.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;

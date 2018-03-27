@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 
-namespace fp_web_aula_1
+namespace fp_web_aula_1_core.Services
 {
     public class LogerApi : ILogerApi
     {
