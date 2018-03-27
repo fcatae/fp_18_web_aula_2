@@ -7,6 +7,8 @@ using fp_web_aula_1_core.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -25,7 +27,31 @@ namespace fp_web_aula_1_api
             services.AddDbContext<CopaContext>
             (options => options.UseSqlServer(connection));
 
-            services.AddMvc();
+
+            services.Configure<GzipCompressionProviderOptions>(
+             o => o.Level = System.IO.Compression.CompressionLevel.Fastest);
+            services.AddResponseCompression(o =>
+            {
+                o.Providers.Add<GzipCompressionProvider>();
+            });
+
+            services.AddCors(x =>
+            {
+                x.AddPolicy("Default",
+                builder =>
+                {
+                    builder.AllowAnyOrigin()
+        .AllowAnyHeader()
+        .AllowAnyMethod(); ;
+                });
+            });
+
+            services.AddMvc(
+                o =>
+                {
+                    o.RespectBrowserAcceptHeader = true;
+                    o.OutputFormatters.Add(new XmlSerializerOutputFormatter());
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,7 +61,7 @@ namespace fp_web_aula_1_api
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors("Default");
             app.UseMvc(r =>
             {
                 r.MapRoute(
