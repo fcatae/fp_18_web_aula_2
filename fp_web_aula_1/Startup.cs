@@ -43,8 +43,8 @@ namespace fp_web_aula_1
             //     await context.Response.WriteAsync("Hello from 3nd delegate.");
             // });
 
-            //if (env.IsDevelopment())
-            //    app.UseDeveloperExceptionPage();
+            if (env.IsDevelopment())
+                app.UseDeveloperExceptionPage();
 
             // app.UseMiddleware<MeuMiddleware>();
             app.UseMeuMiddleware();
