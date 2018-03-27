@@ -2,14 +2,10 @@
 using fp_web_aula_1.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace fp_web_aula_1
 {
@@ -67,59 +63,5 @@ namespace fp_web_aula_1
                 template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
-    }
-
-    public class MeuMiddleware
-    {
-        private readonly ILogerApi _loggerApi;
-        private readonly RequestDelegate _next;
-        private Stopwatch inicio { get; set; }
-
-        public MeuMiddleware(RequestDelegate next)
-        {
-            _loggerApi = new LogerApi();
-            _next = next;
-        }
-        public async Task Invoke(HttpContext httpContext)
-        {
-
-            inicio = Stopwatch.StartNew();// = DateTime.Now; 
-            //logica do middleware
-            await _next(httpContext);
-            //login do fim do middleware aqui
-            inicio.Stop();
-
-            var final = inicio.ElapsedMilliseconds;// DateTime.Now.Subtract(inicio).TotalMilliseconds;
-            _loggerApi.Log(httpContext, final);
-        }
-
-    }
-
-    public class LogerApi : ILogerApi
-    {
-        private Guid guid;
-
-        public LogerApi()
-        {
-            guid = Guid.NewGuid();
-        }
-        public void Log(HttpContext context, long totalTime)
-        {
-            //
-        }
-    }
-    public interface ILogerApi
-    {
-        void Log(HttpContext context, long totalTime);
-    }
-
-    public static class MiddlewareExtensions
-    {
-        public static IApplicationBuilder UseMeuMiddleware(
-            this IApplicationBuilder builder)
-        {
-            return builder.UseMiddleware<MeuMiddleware>();
-        }
-
     }
 }
